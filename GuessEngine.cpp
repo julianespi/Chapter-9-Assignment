@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "input.h"
 
+//precondition: number guess game is initialized
+//postconditoin: runs a number guessing game
 int guessGame(int guess, int limit, int guessCount, int answer, int upperLimit, int lowerLimit, int max, int min)
 {
 	srand(time(NULL));
@@ -86,6 +88,8 @@ int guessGame(int guess, int limit, int guessCount, int answer, int upperLimit, 
 	}	
 }
 
+//preconditoin: none
+//postconditoin: initializes a number guessing game
 void guess()
 {
 	int guessLimit = 0;
