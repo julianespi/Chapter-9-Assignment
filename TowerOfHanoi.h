@@ -16,9 +16,7 @@ private:
 	static const int MAX_PEG = 3;
 	static const int MAX_RINGS = 64;
 	vector<int> *peg;
-
-	int startPeg;
-	int endPeg;
+	
 	int numRings;
 	int numMoves;
 
@@ -40,6 +38,7 @@ public:
 	{
 		do
 		{
+			system("cls");
 			numRings = inputInteger("\n\tEnter the number of rings (1..64) to begin: ", 1, MAX_RINGS);
 			
 			// Fill the first peg with the number of rings
