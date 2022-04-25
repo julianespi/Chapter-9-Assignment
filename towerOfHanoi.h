@@ -1,5 +1,5 @@
 #pragma once
-int numberOfdisk;
+int NUMBEROFDISKS;
 
 //Precondition: reads the winning stack + numberofdisks 
 //Postcondition: checks to see if the winning stack is complete
@@ -97,44 +97,29 @@ void DisplayTowers(vector<int> pegA, vector<int> pegB, vector<int> pegC, int num
 		cout << endl;
 
 	}
-	/*cout << setw(8) << "PegA" << setw(8) << setw(8) << "PegB" << setw(8) << setw(8) << "PegC" << setw(8) << endl;*/
-	cout << endl;
 }
 
-//Precondition:user input of how many disks 
-//Postcondition: sets the number of disks to play with
-void resetTowerOfHanoi(vector<int>& pegA, vector<int>& pegC, int& numberOfdisk)
-{
-	int size = pegC.size();
-	for (int i = 0; i < size; i++)
-		pegC.pop_back();
-
-	numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
-
-	for (int i = numberOfdisk; i > 0; i--)
+void solveTowerOfHanoi(int n, vector<int> &pegA,char pegAName, vector<int> &pegC, char pegCName, vector<int> &pegB, char pegBName) {
+	if (n == 1) 
 	{
-		pegA.push_back(i);
-	}
 
-}
-
-void solveTowerOfHanoi(int n, vector<int> &pegA, vector<int> &pegC, vector<int> &pegB) {
-	if (n == 1) {
 		pegC.push_back(pegA.back());
 		pegA.pop_back();
-		DisplayTowers(pegA, pegB, pegC, numberOfdisk);
+		cout << "Move disk " << n << " from peg " << pegAName << " to peg " << pegCName << endl << endl;
+		DisplayTowers(pegA, pegB, pegC, NUMBEROFDISKS);
 		return;
 	}
-	solveTowerOfHanoi(n - 1, pegA, pegB, pegC);
+	solveTowerOfHanoi(n - 1, pegA,pegAName, pegB,pegBName, pegC,pegCName);
+
 	pegC.push_back(pegA.back());
 	pegA.pop_back();
-	DisplayTowers(pegC, pegA, pegB, numberOfdisk);
-	solveTowerOfHanoi(n - 1, pegB, pegC, pegA);
+	cout << "Move disk " << n << " from peg " << pegAName << " to peg " << pegCName << endl << endl;
+	DisplayTowers(pegC, pegA, pegB, NUMBEROFDISKS);
+	solveTowerOfHanoi(n - 1, pegB, pegBName, pegC, pegCName, pegA, pegAName);
 }
 
 void towerOfHanoi()
 {
-
 	vector<int> pegA;
 	vector<int> pegB;
 	vector<int> pegC;
@@ -142,12 +127,13 @@ void towerOfHanoi()
 
 	char doAgain;
 
-	numberOfdisk = inputInteger("Enter the number of disk you want to play with: ", true);
+	NUMBEROFDISKS = inputInteger("Enter the number of disk you want to play with: ", true);
 
-	for (int i = numberOfdisk; i > 0; i--)
+	for (int i = NUMBEROFDISKS; i > 0; i--)
 	{
 		pegA.push_back(i);
 	}
-
-	solveTowerOfHanoi(numberOfdisk, pegA, pegC, pegB);
+	DisplayTowers(pegA, pegB, pegC, NUMBEROFDISKS);
+	solveTowerOfHanoi(NUMBEROFDISKS, pegA, 'A', pegC, 'C', pegB, 'B');
+	cout << endl;
 }
