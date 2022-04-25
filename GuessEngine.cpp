@@ -13,10 +13,28 @@ int guessGame(int guess, int limit, int guessCount, int answer, int upperLimit, 
 		guessCount++;
 		if (upperLimit == 0)
 		{
-			answer = guess + 1;
-			cout << "Your answer must be " << answer << "." << endl;
-			cout << "Your number was guessed in " << guessCount << " guess(es)." << endl;
-			return guessGame(answer, limit, guessCount, answer, upperLimit, lowerLimit, max, min);
+			if (min == 1)
+			{
+				answer = 1;
+				guess = 1;
+				cout << "Your answer must be " << answer << "." << endl;
+				cout << "Your number was guessed in " << guessCount << " guess(es)." << endl;
+				return guessGame(answer, limit, guessCount, answer, upperLimit, lowerLimit, max, min);
+			}
+			else if (max == limit)
+			{
+				answer = limit;
+				guess = limit;
+				cout << "Your answer must be " << answer << "." << endl;
+				cout << "Your number was guessed in " << guessCount << " guess(es)." << endl;
+				return guessGame(answer, limit, guessCount, answer, upperLimit, lowerLimit, max, min);
+			}
+			else
+			{
+				cout << "Your answer must be " << answer << "." << endl;
+				cout << "Your number was guessed in " << guessCount << " guess(es)." << endl;
+				return guessGame(answer, limit, guessCount, answer, upperLimit, lowerLimit, max, min);
+			}
 		}
 		guess = rand() % upperLimit + lowerLimit;
 		cout << "Is your number " << guess << "?" << endl;
@@ -61,7 +79,6 @@ int guessGame(int guess, int limit, int guessCount, int answer, int upperLimit, 
 				else
 				{
 					upperLimit = max - min;
-					cout << upperLimit << endl;
 					return guessGame(guess, limit, guessCount, answer, upperLimit, lowerLimit, max, min);
 				}
 			}
