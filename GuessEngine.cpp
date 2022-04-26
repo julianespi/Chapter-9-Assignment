@@ -33,6 +33,8 @@ int guessGame(int guess, int limit, int guessCount, int answer, int upperLimit, 
 			}
 			else
 			{
+				guess = guess + 1;
+				answer = guess;
 				cout << "Your answer must be " << answer << "." << endl;
 				cout << "Your number was guessed in " << guessCount << " guess(es)." << endl;
 				return guessGame(answer, limit, guessCount, answer, upperLimit, lowerLimit, max, min);
